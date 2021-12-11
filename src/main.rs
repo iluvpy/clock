@@ -4,14 +4,6 @@ use std::thread;
 
 mod numbers;
 
-fn print_nums() {
-	for i in 0..numbers::NUMBERS.len() {
-		for j in 0..numbers::NUMBERS[i].len() {
-			println!("{}", numbers::NUMBERS[i][j]);
-		}
-	}
-}
-
 
 fn print_time(now: DateTime<Utc>) {
 	let (is_pm, hour) = now.hour12();

@@ -90,18 +90,6 @@ pub const NINE: [&str; 6] = [
 ];
 
 
-pub const NUMBERS: [[&str; 6]; 10] = [
-	ZERO,
-	ONE,
-	TWO, 
-	THREE,
-	FOUR,
-	FIVE,
-	SIX,
-	SEVEN,
-	EIGHT,
-	NINE
-];
 
 pub fn get_number(ch: char) -> [&'static str; 6] {
 	let number = match ch {
