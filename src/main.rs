@@ -36,7 +36,7 @@ pub fn print_time(now: DateTime<Utc>) {
 		for n in &hour_numbers {
 			layer_string.push_str(n[layer]);
 		}
-		layer_string.push('\t');
+		layer_string.push(' ');
 		for n in &minute_numbers {
 			layer_string.push_str(n[layer]);
 		}
