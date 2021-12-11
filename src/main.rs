@@ -1,6 +1,7 @@
 use chrono::{Timelike, Utc, DateTime};
 use std::time::Duration;
 use std::thread;
+use std::io::{self, Write};
 
 mod numbers;
 
@@ -30,7 +31,6 @@ pub fn print_time(now: DateTime<Utc>) {
 	for ch in second_chars {
 		second_numbers.push(numbers::get_number(ch));
 	}
-
 	for layer in 0..6 { // 6 is the number of layers
 		let mut layer_string: String = String::from("");
 		for n in &hour_numbers {
@@ -44,6 +44,7 @@ pub fn print_time(now: DateTime<Utc>) {
 		for n in &second_numbers {
 			layer_string.push_str(n[layer]);
 		}
+		io::stdout().flush().unwrap();
 		println!("{}", layer_string);
 	}
 	
