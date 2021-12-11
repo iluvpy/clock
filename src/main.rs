@@ -1,7 +1,6 @@
 use chrono::{Timelike, Utc, DateTime};
 use std::time::Duration;
 use std::thread;
-use std::io::{self, Write};
 
 mod numbers;
 
@@ -13,7 +12,8 @@ fn print_nums() {
 	}
 }
 
-pub fn print_time(now: DateTime<Utc>) {
+
+fn print_time(now: DateTime<Utc>) {
 	let (is_pm, hour) = now.hour12();
 	let hour = hour + if is_pm {12} else {0};
 	let hour_chars: Vec<char> = hour.to_string().chars().collect();
@@ -31,23 +31,43 @@ pub fn print_time(now: DateTime<Utc>) {
 	for ch in second_chars {
 		second_numbers.push(numbers::get_number(ch));
 	}
+	let mut layers: Vec<String> = vec![];
 	for layer in 0..6 { // 6 is the number of layers
-		let mut layer_string: String = String::from("");
+		let mut layer_string: String = String::from("|");
 		for n in &hour_numbers {
 			layer_string.push_str(n[layer]);
 		}
-		layer_string.push(' ');
+		if layer == 2 || layer == 4{
+			layer_string.push_str(" ## ");
+		}
+		else {
+			layer_string.push_str("    ");
+		}
 		for n in &minute_numbers {
 			layer_string.push_str(n[layer]);
 		}
-		layer_string.push(' ');
+		if layer == 2 || layer == 4{
+			layer_string.push_str(" ## ");
+		}
+		else {
+			layer_string.push_str("    ");
+		}
 		for n in &second_numbers {
 			layer_string.push_str(n[layer]);
 		}
-		io::stdout().flush().unwrap();
-		println!("{}", layer_string);
+		layer_string.push('|');
+		layers.push(layer_string);
 	}
-	
+	let mut roof = String::from("");
+	for _ in 0..layers[0].len() {
+		roof.push('-');
+	}
+	println!("{}", roof);
+	for layer in &layers {
+		println!("{}", layer);
+	}
+	println!("{}", roof);
+
 }
 
 fn main() {
@@ -56,6 +76,6 @@ fn main() {
 		let now = Utc::now();
 		print_time(now);
 		thread::sleep(Duration::from_millis(1000));
-		print!("{esc}c", esc = 27 as char);
+		print!("{esc}c", esc = 27 as char); // clear console
 	}
 }
