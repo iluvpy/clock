@@ -78,7 +78,7 @@ pub const SIX: [&str; NUMBER_SIZE] = [
 pub const SEVEN: [&str; NUMBER_SIZE] = [
 	" ███████╗ ",
 	" ╚════██║ ",
-	"	  ██╔╝ ",
+	"     ██╔╝ ",
 	"    ██╔╝  ",
 	"    ██║   ",
 	"    ╚═╝   "
