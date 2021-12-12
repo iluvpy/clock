@@ -51,7 +51,8 @@ fn print_time(now: DateTime<Utc>) {
 		layers.push(layer_string);
 	}
 	let mut roof = String::from("");
-	for _ in 0..layers[0].len() {
+	let len = layers[0].chars().count();
+	for _ in 0..len {
 		roof.push('-');
 	}
 	println!("{}", roof);
@@ -67,7 +68,11 @@ fn main() {
 	loop {
 		let now = Utc::now();
 		print_time(now);
-		thread::sleep(Duration::from_millis(1000));
+		let mut new_now = Utc::now();
+		while now.second() == new_now.second() {
+			thread::sleep(Duration::from_millis(10));
+			new_now = Utc::now();
+		}
 		print!("{esc}c", esc = 27 as char); // clear console
 	}
 }
