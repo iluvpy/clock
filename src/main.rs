@@ -29,8 +29,8 @@ fn print_time(now: DateTime<Utc>) {
 		for n in &hour_numbers {
 			layer_string.push_str(n[layer]);
 		}
-		if layer == 2 || layer == 4{
-			layer_string.push_str(" ## ");
+		if layer == 1 || layer == 4{
+			layer_string.push_str(" ██ ");
 		}
 		else {
 			layer_string.push_str("    ");
@@ -38,8 +38,8 @@ fn print_time(now: DateTime<Utc>) {
 		for n in &minute_numbers {
 			layer_string.push_str(n[layer]);
 		}
-		if layer == 2 || layer == 4{
-			layer_string.push_str(" ## ");
+		if layer == 1 || layer == 4{
+			layer_string.push_str(" ██ ");
 		}
 		else {
 			layer_string.push_str("    ");
